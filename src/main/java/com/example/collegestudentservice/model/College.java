@@ -1,6 +1,5 @@
 package com.example.collegestudentservice.model;
 
-import sun.util.resources.Bundles;
 
 import javax.persistence.*;
 
@@ -21,12 +20,11 @@ public class College {
     public College() {
     }
 
-    public College(int id, String collegeName, String address, String grade, Student student) {
+    public College(int id, String collegeName, String address, String grade) {
         this.id = id;
         this.collegeName = collegeName;
         this.address = address;
         this.grade = grade;
-        this.student = student;
     }
 
     public Student getStudent() {

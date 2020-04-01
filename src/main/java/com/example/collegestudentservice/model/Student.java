@@ -10,7 +10,7 @@ public class Student {
     String firstName;
     String lastName;
     String email;
-    int marks;
+    String marks;
 
     @OneToOne(mappedBy = "student", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private College college;
@@ -26,13 +26,21 @@ public class Student {
     public Student() {
     }
 
-    public Student(int id, String firstName, String lastName, String email, int marks,College college) {
+    public Student(int id, String firstName, String lastName, String email, String marks,College college) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.marks = marks;
         this.college = college;
+    }
+
+    public String getMarks() {
+        return marks;
+    }
+
+    public void setMarks(String marks) {
+        this.marks = marks;
     }
 
     public int getId() {
@@ -67,11 +75,5 @@ public class Student {
         this.email = email;
     }
 
-    public int getMarks() {
-        return marks;
-    }
 
-    public void setMarks(int marks) {
-        this.marks = marks;
-    }
 }
