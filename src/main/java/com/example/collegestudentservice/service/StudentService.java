@@ -4,7 +4,11 @@ import com.example.collegestudentservice.model.College;
 import com.example.collegestudentservice.model.Student;
 import com.example.collegestudentservice.repository.StudentRepository;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -15,6 +19,15 @@ public class StudentService {
     public StudentService(StudentRepository studentRepository)
     {
         this.studentRepository = studentRepository;
+    }
+
+    public ResponseEntity<Student> findById(Integer id) {
+        Optional<Student> studentById = studentRepository.findById(id);
+
+        if(studentById.isPresent()){
+            return new ResponseEntity<>(studentById.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
@@ -36,5 +49,14 @@ public class StudentService {
         student.setCollege(college);
 
         return studentRepository.save(student);
+    }
+
+    public void deleteById(Integer id) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        if(student.isPresent()){
+            studentRepository.deleteById(id);
+        }
+
     }
 }
